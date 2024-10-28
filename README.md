@@ -5,7 +5,7 @@ this app provides the service of transfering photos between your mac and android
 
 ## prerequisite - 
 if you have vs code installed and python installed 
-you just need to install [flask](https://phoenixnap.com/kb/install-flask) and [qrcode](https://pypi.org/project/qrcode/) and you can skip this part 
+you just need to install [flask](https://phoenixnap.com/kb/install-flask) and [qrcode](https://pypi.org/project/qrcode/)
 1. you should have vs code installed
 2. you should have python installed you can download python from here - [download python](https://www.python.org/downloads/) if you are still having trouble downloading python check out this blog [free code camp blog](https://www.freecodecamp.org/news/how-to-install-python-on-a-mac/)
 3. install flask, it's easy just write this command in your terminal
@@ -13,7 +13,7 @@ you just need to install [flask](https://phoenixnap.com/kb/install-flask) and [q
 pip install flask
 ```
 4. if you still can't install flask look up [this site](https://phoenixnap.com/kb/install-flask)
-5. but now that you have installed flask in some virtual env. other then you base env. you should select that interpreter in vsc here is how to do that [link](https://code.visualstudio.com/docs/python/environments)
+5. if you have created a new virtual env. other then you base env. you should select that interpreter in vsc here is how to do that [link](https://code.visualstudio.com/docs/python/environments) if you don't know what does this mean don't worry just carry on with the further steps.
 6. install [qrcode](https://pypi.org/project/qrcode/) library.
 
 __NOTE: your phone and mac should be on the same wifi__
