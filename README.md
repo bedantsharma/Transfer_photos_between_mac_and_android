@@ -9,7 +9,7 @@ you just need to install flask and you can skip this part and [qrcode](https://p
 1. you should have vs code installed
 2. you should have python installed you can download python from here - [download python](https://www.python.org/downloads/) if you are still having trouble downloading python check out this blog [free code camp blog](https://www.freecodecamp.org/news/how-to-install-python-on-a-mac/)
 3. install flask, it's easy just write this command in your terminal
-``` bash
+```
 pip install flask
 ```
 4. if you still can't install flask look up [this site](https://phoenixnap.com/kb/install-flask)
@@ -41,10 +41,13 @@ for other who don't know how to do that you can just download the zip file as sh
 6. Run the app.py file in the terminal - 
 by now your screen should look like this - 
 <img width="440" alt="image" src="https://github.com/user-attachments/assets/67da3310-84cc-4898-b486-e12f912f2403">
+
 now you just have to type and press enter
-``` bash
+
+```
 python3 app.py
 ```
+
 <img width="650" alt="image" src="https://github.com/user-attachments/assets/6c87ca2c-d22d-4007-904f-420b9899d6ad">
 
 7. this will redirect you to the the qr code webpage - 
