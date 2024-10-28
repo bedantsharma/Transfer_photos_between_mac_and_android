@@ -13,7 +13,7 @@ you just need to install [flask](https://phoenixnap.com/kb/install-flask) and [q
 pip install flask
 ```
 4. if you still can't install flask look up [this site](https://phoenixnap.com/kb/install-flask)
-5. if you have created a new virtual env. other then you base env. you should select that interpreter in vsc here is how to do that [link](https://code.visualstudio.com/docs/python/environments) if you don't know what does this mean don't worry just carry on with the further steps.
+5. if you have created a new virtual env. other then you base env. and install flask in that env. you should select that interpreter in vs code here is how to do that [link](https://code.visualstudio.com/docs/python/environments) if you don't know what does this mean don't worry just carry on with the further steps.
 6. install [qrcode](https://pypi.org/project/qrcode/) library.
 
 __NOTE: your phone and mac should be on the same wifi__
