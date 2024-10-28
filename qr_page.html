@@ -1,0 +1,87 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Upload Page QR Code</title>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                background-color: #f5f5f7;
+            }
+            .container {
+                background-color: white;
+                padding: 2rem;
+                border-radius: 20px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                text-align: center;
+                max-width: 400px;
+                width: 90%;
+            }
+            h2 {
+                color: #1d1d1f;
+                margin-bottom: 1.5rem;
+            }
+            .qr-code {
+                margin: 1.5rem 0;
+            }
+            .qr-code img {
+                max-width: 100%;
+                height: auto;
+            }
+            .url {
+                word-break: break-all;
+                margin: 1rem 0;
+                padding: 0.75rem;
+                background-color: #f5f5f7;
+                border-radius: 8px;
+                font-family: monospace;
+            }
+            .copy-button {
+                background-color: #0071e3;
+                color: white;
+                border: none;
+                padding: 0.75rem 1.5rem;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 1rem;
+                transition: background-color 0.2s;
+            }
+            .copy-button:hover {
+                background-color: #0077ed;
+            }
+            .status {
+                margin-top: 1rem;
+                color: #00b300;
+                min-height: 1.5rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2>Scan QR Code to Access Upload Page</h2>
+            <div class="qr-code">
+                <img src="qr_code.png" alt="QR Code">
+            </div>
+            <div class="url">http://172.23.5.12:5000</div>
+            <button class="copy-button" onclick="copyUrl()">Copy URL</button>
+            <div class="status" id="status"></div>
+        </div>
+
+        <script>
+            function copyUrl() {
+                navigator.clipboard.writeText('http://172.23.5.12:5000').then(function() {
+                    document.getElementById('status').textContent = 'URL copied to clipboard!';
+                    setTimeout(() => {
+                        document.getElementById('status').textContent = '';
+                    }, 2000);
+                });
+            }
+        </script>
+    </body>
+    </html>
+    

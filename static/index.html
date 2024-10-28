@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .upload-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 30px;
+            background-color: #2d2d2d;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .header p {
+            color: #bebebe;
+            font-size: 16px;
+        }
+
+        .upload-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .file-inputs {
+            display: none;
+        }
+
+        .upload-button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        .upload-button:active {
+            transform: scale(0.98);
+        }
+
+        .upload-button:hover {
+            opacity: 0.9;
+        }
+
+        .gallery-button {
+            background-color: #7c3aed;
+            color: white;
+        }
+
+        .camera-button {
+            background-color: #2563eb;
+            color: white;
+        }
+
+        .upload-all-button {
+            background-color: #059669;
+            color: white;
+            width: 100%;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .preview-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .preview-item {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: #404040;
+        }
+
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .preview-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .remove-image {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background-color: rgba(239, 68, 68, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 26px;
+            height: 26px;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+            z-index: 2;
+        }
+
+        .remove-image:hover {
+            background-color: rgb(239, 68, 68);
+        }
+
+        .status {
+            margin-top: 20px;
+            text-align: center;
+            font-weight: 500;
+            min-height: 24px;
+        }
+
+        .status.success {
+            color: #34d399;
+        }
+
+        .status.error {
+            color: #f87171;
+        }
+
+        .progress-container {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #404040;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress {
+            width: 0%;
+            height: 100%;
+            background-color: #059669;
+            transition: width 0.3s ease;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #bebebe;
+        }
+
+        .empty-state i {
+            font-size: 48px;
+            margin-bottom: 15px;
+            color: #4b5563;
+        }
+
+        @media (max-width: 480px) {
+            .upload-container {
+                padding: 20px;
+            }
+
+            .preview-container {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+                gap: 10px;
+            }
+
+            .header h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="upload-container">
+        <div class="header">
+            <h2>Upload Images</h2>
+            <p>Select multiple images or take photos</p>
+        </div>
+        
+        <div class="upload-buttons">
+            <div class="file-inputs">
+                <input type="file" id="file-input" accept="image/*" multiple>
+                <input type="file" id="camera-input" accept="image/*" capture="camera">
+            </div>
+            
+            <button class="upload-button gallery-button" onclick="handleGalleryClick()">
+                📁 Select from Gallery
+            </button>
+            <button class="upload-button camera-button" onclick="handleCameraClick()">
+                📸 Take Photo
+            </button>
+        </div>
+
+        <div id="preview-container" class="preview-container">
+            <div class="empty-state">
+                <p>No images selected yet</p>
+            </div>
+        </div>
+
+        <button class="upload-button upload-all-button" id="upload-all-button" style="display: none;">
+            ⬆️ Upload All Images
+        </button>
+
+        <div class="progress-container" id="progress-container">
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+        </div>
+
+        <div class="status" id="status"></div>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('file-input');
+        const cameraInput = document.getElementById('camera-input');
+        const previewContainer = document.getElementById('preview-container');
+        const status = document.getElementById('status');
+        const uploadButton = document.getElementById('upload-all-button');
+        const progressContainer = document.getElementById('progress-container');
+        const progress = document.querySelector('.progress');
+        
+        let selectedFiles = new Set();
+
+        function handleGalleryClick() {
+            fileInput.click();
+        }
+
+        function handleCameraClick() {
+            cameraInput.click();
+        }
+
+        function showStatus(message, isError = false) {
+            status.textContent = message;
+            status.className = 'status ' + (isError ? 'error' : 'success');
+        }
+
+        function updateEmptyState() {
+            if (selectedFiles.size === 0) {
+                previewContainer.innerHTML = `
+                    <div class="empty-state">
+                        <p>No images selected yet</p>
+                    </div>`;
+            }
+        }
+
+        async function handleFileSelect(e) {
+            const files = Array.from(e.target.files);
+            if (files.length === 0) return;
+
+            // Clear empty state if present
+            if (selectedFiles.size === 0) {
+                previewContainer.innerHTML = '';
+            }
+
+            // Process each file
+            for (const file of files) {
+                try {
+                    await addFileToPreview(file);
+                } catch (error) {
+                    console.error('Error processing file:', error);
+                    showStatus(`Error processing ${file.name}`, true);
+                }
+            }
+
+            updateUploadButtonVisibility();
+            e.target.value = ''; // Reset input to allow selecting the same file again
+        }
+
+        function addFileToPreview(file) {
+            return new Promise((resolve, reject) => {
+                if (!file.type.startsWith('image/')) {
+                    reject(new Error('Not an image file'));
+                    return;
+                }
+
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    try {
+                        const previewItem = document.createElement('div');
+                        previewItem.className = 'preview-item';
+                        
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        
+                        const removeButton = document.createElement('button');
+                        removeButton.className = 'remove-image';
+                        removeButton.innerHTML = '×';
+                        removeButton.onclick = function(evt) {
+                            evt.stopPropagation();
+                            selectedFiles.delete(file);
+                            previewItem.remove();
+                            updateUploadButtonVisibility();
+                            updateEmptyState();
+                        };
+                        
+                        previewItem.appendChild(img);
+                        previewItem.appendChild(removeButton);
+                        previewContainer.appendChild(previewItem);
+                        
+                        selectedFiles.add(file);
+                        resolve();
+                    } catch (error) {
+                        reject(error);
+                    }
+                };
+
+                reader.onerror = () => reject(new Error('Error reading file'));
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function updateUploadButtonVisibility() {
+            uploadButton.style.display = selectedFiles.size > 0 ? 'block' : 'none';
+        }
+
+        function updateProgress(percent) {
+            progress.style.width = `${percent}%`;
+        }
+
+        async function uploadImages() {
+            if (selectedFiles.size === 0) {
+                showStatus('Please select images first', true);
+                return;
+            }
+
+            showStatus('Uploading...');
+            progressContainer.style.display = 'block';
+            uploadButton.disabled = true;
+            
+            const formData = new FormData();
+            selectedFiles.forEach(file => {
+                formData.append('images', file);
+            });
+
+            try {
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showStatus(`Successfully uploaded ${data.uploaded_files.length} images!`);
+                    selectedFiles.clear();
+                    previewContainer.innerHTML = '';
+                    updateEmptyState();
+                    updateUploadButtonVisibility();
+                } else {
+                    throw new Error(data.error || 'Upload failed');
+                }
+            } catch (error) {
+                showStatus('Upload failed. Please try again.', true);
+                console.error('Error:', error);
+            } finally {
+                progressContainer.style.display = 'none';
+                uploadButton.disabled = false;
+                updateProgress(0);
+            }
+        }
+
+        fileInput.addEventListener('change', handleFileSelect);
+        cameraInput.addEventListener('change', handleFileSelect);
+        uploadButton.addEventListener('click', uploadImages);
+    </script>
+</body>
+</html>
