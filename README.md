@@ -56,7 +56,9 @@ __NOTE : your phone and mac should be on the same wifi__
 
 <img width="528" alt="image" src="https://github.com/user-attachments/assets/1c7f8a92-df81-4468-850d-aa3170c66c7c">
 
-if you are not redirected to the webpage you can just copy the qr code from your terminal and past it in your phones browser
+if you are not redirected to the webpage you can just copy the ip address from your terminal and past it in your phones browser example ip - 192.xxx.xxx.xx:4325
+where 4325 is the port number
+
 
 8. now scan this qr code in your phone and you will be redirected to the phone page that looks like this 
 <img width="650" src = "https://github.com/user-attachments/assets/1f87dbbf-197c-48a7-af64-4369e78f3882" alt = "image2">
