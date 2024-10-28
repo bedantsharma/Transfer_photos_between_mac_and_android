@@ -16,6 +16,7 @@ pip install flask
 5. if you have created a new virtual env. other then you base env. and install flask in that env. you should select that interpreter in vs code here is how to do that [link](https://code.visualstudio.com/docs/python/environments) if you don't know what does this mean don't worry just carry on with the further steps.
 6. install [qrcode](https://pypi.org/project/qrcode/) library.
 
+
 __NOTE: your phone and mac should be on the same wifi__
 
 # How to use
