@@ -220,7 +220,7 @@ def open_browser(html_file_path):
     webbrowser.open('file://' + os.path.abspath(html_file_path))
 
 if __name__ == '__main__':
-    port = 5000
+    port = 4673
     ip = get_local_ip()
     url = f'http://{ip}:{port}'
     
