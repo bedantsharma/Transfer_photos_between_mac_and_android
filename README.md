@@ -16,7 +16,7 @@ pip install flask
 5. but now that you have installed flask in some virtual env. other then you base env. you should select that interpreter in vsc here is how to do that [link](https://code.visualstudio.com/docs/python/environments)
 6. install [qrcode](https://pypi.org/project/qrcode/) library.
 
-==NOTE: your phone and mac should be on the same wifi==
+__NOTE: your phone and mac should be on the same wifi__
 
 # How to use
 
@@ -42,7 +42,7 @@ for other who don't know how to do that you can just download the zip file as sh
 by now your screen should look like this - 
 <img width="440" alt="image" src="https://github.com/user-attachments/assets/67da3310-84cc-4898-b486-e12f912f2403">
 
-now you just have to type and press enter
+now you just have to type this command in your terminal window and press enter
 
 ```
 python3 app.py
@@ -51,7 +51,7 @@ python3 app.py
 <img width="650" alt="image" src="https://github.com/user-attachments/assets/6c87ca2c-d22d-4007-904f-420b9899d6ad">
 
 7. this will redirect you to the the qr code webpage - 
-==NOTE : your phone and mac should be on the same wifi== 
+__NOTE : your phone and mac should be on the same wifi__
 
 <img width="528" alt="image" src="https://github.com/user-attachments/assets/1c7f8a92-df81-4468-850d-aa3170c66c7c">
 
